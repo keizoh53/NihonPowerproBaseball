@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>選手一覧</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/4.1.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap-theme.min.css"
+          th:href="@{/webjars/bootstrap/4.1.1/css/bootstrap-theme.min.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1> 選手管理システム </h1>
+    <div class="col-sm-12">
+        <form th:action="@{/players/create}" th:object="${playerForm}" class="form-horizontal" method="post">
+            <fieldset>
+                <legend> 選手情報作成</legend>
+                <div class="form-group" th:classappend="${#fields.hasErrors('lastName')}? 'has-error has-feedback'">
+                    <label for="lastName" class="col-sm-2 control-label"> 姓 </label>
+                    <div class="col-sm-10">
+                        <input type="text" id="lastName" name="lastName" th:field="*{lastName}" class="form-control"
+                               value=" 山田 "/>
+                        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="help-block"> error! </span>
+                    </div>
+                </div>
+                <div class="form-group" th:classappend="${#fields.hasErrors('team')}? 'has-error has-feedback'">
+                    <label for="team" class="col-sm-2 control-label"> 所属チーム </label>
+                    <div class="col-sm-10">
+                        <input type="text" id="team" name="lastName" th:field="*{team}" class="form-control"
+                               value=" 湾岸島ウェーブス "/>
+                        <span th:if="${#fields.hasErrors('team')}" th:errors="*{team}"
+                              class="help-block"> error! </span>
+                    </div>
+                </div>
+                <div class="form-group" th:classappend="${#fields.hasErrors('mainPosition')}? 'has-error has-feedback'">
+                    <label for="mainPosition" class="col-sm-2 control-label"> メインポジション </label>
+                    <div class="col-sm-10">
+                        <input type="text" id="mainPosition" name="lastName" th:field="*{mainPosition}"
+                               class="form-control" value=" 捕手 "/>
+                        <span th:if="${#fields.hasErrors('mainPosition')}" th:errors="*{mainPosition}"
+                              class="help-block"> error! </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary"> 作成</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <hr/>
+        <table class="table table-striped table-bordered table-condensed">
+            <tr>
+                <th> ID </th>
+                <th> 姓 </th>
+                <th> 所属チーム </th>
+                <th> メインポジション </th>
+                <th colspan="2"> 編集 </th>
+            </tr>
+            <tr th:each="player : ${players}">
+                <td th:text="${player.playerId}">100</td>
+                <td th:text="${player.lastName}">山田</td>
+                <td th:text="${player.team}">湾岸島ウェーブス</td>
+                <td th:text="${player.mainPosition}">捕手</td>
+                <td>
+                    <form th:action="@{/players/edit}" method="get">
+                        <input class="btn btn-default" type="submit" name="form" value=" 編集 "/>
+                        <input type="hidden" name="playerId" th:value="${player.playerId}"/>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/players/delete}" method="post">
+                        <input class="btn btn-danger" type="submit" value=" 削除 "/>
+                        <input type="hidden" name="playerId" th:value="${player.playerId}"/>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script src="https://ajax.googleapis.con/ajax/libs/jquery/1.11.1/jquery.min.js"
+        th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<script src="http://maxcdn.bootstrap.com/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
+</body>
+</html>

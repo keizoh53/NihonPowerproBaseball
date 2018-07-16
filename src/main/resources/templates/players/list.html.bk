@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>選手一覧</title>
+</head>
+<body>
+<div>
+    <form th:action="@{/players/create}" th:object="${playerForm}" method="post">
+        <dl>
+            <dt><label for="lastName">姓</label></dt>
+            <dd>
+                <input type="text" id="lastName" name="lastName" th:field="*{lastName}" th:errorClass="error-input"
+                       value="山田"/>
+                <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                      class="error-messages">error</span>
+            </dd>
+            <!--<dt><label for="firstName">名</label></dt>-->
+            <!--<dd>-->
+            <!--<input type="text" id="firstName" name="firstName" th:field="*{firstName}" th:errorClass="error-input"-->
+            <!--value="太郎"/>-->
+            <!--<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"-->
+            <!--class="error-messages">error</span>-->
+            <!--</dd>-->
+            <dt><label for="team">所属チーム</label></dt>
+            <dd>
+                <input type="text" id="team" name="team" th:field="*{team}" th:errorClass="error-input"
+                       value="東京スーパースターズ"/>
+                <span th:if="${#fields.hasErrors('team')}" th:errors="*{team}"
+                      class="error-messages">error</span>
+            </dd>
+            <dt><label for="mainPosition">メインポジション</label></dt>
+            <dd>
+                <input type="text" id="mainPosition" name="mainPosition" th:field="*{mainPosition}"
+                       th:errorClass="error-input"
+                       value="捕手"/>
+                <span th:if="${#fields.hasErrors('mainPosition')}" th:errors="*{mainPosition}"
+                      class="error-messages">error</span>
+            </dd>
+        </dl>
+        <input type="submit" value="作成"/>
+    </form>
+</div>
+<hr/>
+<table>
+    <tr th:each="player : ${players}">
+        <td th:text="${player.playerId}">100</td>
+        <td th:text="${player.lastName}"> 山田</td>
+        <td th:text="${player.team}"> 湾岸島ウェーブス</td>
+        <td th:text="${player.mainPosition}"> 捕手</td>
+        <!--<td th:text="${player.firstName}"> 太郎</td>-->
+        <!--<td>-->
+            <!--<select name="${player.team}">-->
+                <!--<option value="湾岸島ウェーブス">湾岸島ウェーブス</option>-->
+                <!--<option value="">選択肢2</option>-->
+                <!--<option value="選択肢3">選択肢3</option>-->
+            <!--</select>-->
+            <!--東京スーパースターズ-->
+        <!--</td>-->
+        <!--<td>-->
+            <!--<select name="${player.mainPosition}">-->
+                <!--<option value="投手">投手</option>-->
+                <!--<option value="捕手">捕手</option>-->
+                <!--<option value="一塁手">一塁手</option>-->
+                <!--<option value="二塁手">二塁手</option>-->
+                <!--<option value="三塁手">三塁手</option>-->
+                <!--<option value="遊撃手">遊撃手</option>-->
+                <!--<option value="外野手">外野手</option>-->
+            <!--</select>-->
+            <!--捕手-->
+        <!--</td>-->
+        <td>
+            <form th:action="@{players/edit}" method="get">
+                <input type="submit" name="form" value=" 編集 "/>
+                <input type="hidden" name="playerId" value="${player.playerId}"/>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{players/delete}" method="post">
+                <input type="submit" value=" 削除 "/>
+                <input type="hidden" name="playerId" value="${player.playerId}"/>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
