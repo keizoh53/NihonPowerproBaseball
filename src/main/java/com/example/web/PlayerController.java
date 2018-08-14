@@ -33,14 +33,31 @@ public class PlayerController {
         return "players/list";
     }
 
+//    @RequestMapping(method = RequestMethod.GET)
+    String create(Model model) {
+        List<Player> players = playerService.findAll();
+        model.addAttribute("players", players);
+        return "players/create";
+    }
+
+    @RequestMapping(value = "create", params = "goToCreate")
+    String goToCreate(){
+        return "players/create";
+    }
+
     @RequestMapping(value = "create", method = RequestMethod.POST)
     String create(@Validated PlayerForm form, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return list(model);
+            return create(model);
         }
         Player player = new Player();
         BeanUtils.copyProperties(form, player);
         playerService.create(player);
+        return goToTopFromCreate();
+    }
+
+    @RequestMapping(value = "create", params = "goToTopFromCreate")
+    String goToTopFromCreate() {
         return "redirect:/players";
     }
 
@@ -63,8 +80,8 @@ public class PlayerController {
         return "redirect:/players";
     }
 
-    @RequestMapping(value = "edit", params = "goToTop")
-    String goToTop() {
+    @RequestMapping(value = "edit", params = "goToTopFromEdit")
+    String goToTopFromEdit() {
         return "redirect:/players";
     }
 

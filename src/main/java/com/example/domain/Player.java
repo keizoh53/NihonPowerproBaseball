@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "players")
@@ -13,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Player {
-//    public Player(Integer playerId, String firstName, String lastName) {
+    //    public Player(Integer playerId, String firstName, String lastName) {
 //        this.playerId = playerId;
 //        this.firstName = firstName;
 //        this.lastName = lastName;
@@ -21,14 +20,18 @@ public class Player {
     @Id
     @GeneratedValue
     private Integer playerId;
-//    @Column(nullable = true)
-//    private String firstName;
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String lastName;
+    @Column(nullable = false)
+    private String firstName;
     @Column(nullable = false)
     private String team;
     @Column(nullable = false)
+    private String uniformNumber;
+    @Column(nullable = false)
     private String mainPosition;
+    @Column(nullable = true)
+    private String subPosition;
 //    @Column(nullable = true)
 //    private List<String> subPosition;
 //    private Integer age;

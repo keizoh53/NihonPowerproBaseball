@@ -2,57 +2,51 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title> 選手情報編集 </title>
+    <title>選手作成</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/4.1.1/css/bootstrap.min.css}"/>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap-theme.min.css"
           th:href="@{/webjars/bootstrap/4.1.1/css/bootstrap-theme.min.css}"/>
 </head>
 <body>
-<div class="col-sm-12">
+<div class="container">
     <h1> 選手管理システム </h1>
     <div class="col-sm-12">
-        <form th:action="@{/players/edit}" th:object="${playerForm}" class="form-horizontal" method="post">
+        <form th:action="@{/players/create}" th:object="${playerForm}" class="form-horizontal" method="post">
             <fieldset>
-                <legend> 選手情報編集 </legend>
+                <legend> 選手情報作成 </legend>
                 <div class="form-group" th:classappend="${#fields.hasErrors('lastName')}? 'has-error has-feedback'">
                     <label for="lastName" class="col-sm-2 control-label"> 姓 </label>
                     <div class="col-sm-10">
-                        <input type="text" id="lastName" name="lastName" th:field="*{lastName}" class="form-control" value=" 山田 "/>
-                        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="help-block">error!</span>
+                        <input type="text" id="lastName" name="lastName" th:field="*{lastName}" class="form-control"
+                               value=" 山田 "/>
+                        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="help-block"> error! </span>
                     </div>
                 </div>
                 <div class="form-group" th:classappend="${#fields.hasErrors('firstName')}? 'has-error has-feedback'">
                     <label for="firstName" class="col-sm-2 control-label"> 名 </label>
                     <div class="col-sm-10">
-                        <input type="text" id="firstName" name="lastName" th:field="*{firstName}" class="form-control" value=" 太郎 "/>
-                        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="help-block">error!</span>
+                        <input type="text" id="firstName" name="lastName" th:field="*{firstName}" class="form-control"
+                               value=" 太郎 "/>
+                        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="help-block"> error! </span>
                     </div>
                 </div>
                 <div class="form-group" th:classappend="${#fields.hasErrors('team')}? 'has-error has-feedback'">
                     <label for="team" class="col-sm-2 control-label"> 所属チーム </label>
                     <div class="col-sm-10">
-                        <!--<input type="text" id="team" name="lastName" th:field="*{team}" class="form-control" value=" 湾岸島ウェーブス "/>-->
+                        <!--<input type="text" id="team" name="lastName" th:field="*{team}" class="form-control"-->
+                        <!--value=" 湾岸島ウェーブス "/>-->
                         <select id="team" name="lastName" th:field="*{team}" class="form-control" value=" 湾岸島ウェーブス " >
-                            <option value=" 未所属 "> 未所属 </option>
                             <optgroup label="セリーグ">
                                 <option value=" 湾岸島ウェーブス "> 湾岸島ウェーブス </option>
-                                <option value=" 松ノ木ミドガルズ "> 松ノ木ミドガルズ </option>
-                                <option value=" 函館スノーホワイト "> 函館スノーホワイト </option>
-                                <option value=" タートルズ "> タートルズ </option>
-                                <option value=" ガンソーエンジェルス "> ガンソーエンジェルス </option>
-                                <option value=" 猫耳醍醐味SHOWME "> 猫耳醍醐味SHOWME </option>
                             </optgroup>
                             <optgroup label="パリーグ">
                                 <option value=" 任気堂カスタムメッツ "> 任気堂カスタムメッツ </option>
-                                <option value=" JPTセントラル "> JPTセントラル </option>
-                                <option value=" 原住ラガーバックス "> 原住ラガーバックス </option>
                                 <option value=" 岩尾ガジェッツ "> 岩尾ガジェッツ </option>
-                                <option value=" 瀬良ホームズ "> 瀬良ホームズ </option>
-                                <option value=" 平和島ブラックスターズ "> 平和島ブラックスターズ </option>
                             </optgroup>
                         </select>
-                        <span th:if="${#fields.hasErrors('team')}" th:errors="*{team}" class="help-block">error!</span>
+                        <span th:if="${#fields.hasErrors('team')}" th:errors="*{team}"
+                              class="help-block"> error! </span>
                     </div>
                 </div>
                 <div class="form-group" th:classappend="${#fields.hasErrors('uniformNumber')}? 'has-error has-feedback'">
@@ -66,7 +60,8 @@
                 <div class="form-group" th:classappend="${#fields.hasErrors('mainPosition')}? 'has-error has-feedback'">
                     <label for="mainPosition" class="col-sm-2 control-label"> メインポジション </label>
                     <div class="col-sm-10">
-                        <!--<input type="text" id="mainPosition" name="lastName" th:field="*{mainPosition}" class="form-control" value=" 捕手 "/>-->
+                        <!--<input type="text" id="mainPosition" name="lastName" th:field="*{mainPosition}"-->
+                        <!--class="form-control" value=" 捕手 "/>-->
                         <select id="mainPosition" name="lastName" th:field="*{mainPosition}" class="form-control" value=" 捕手 " >
                             <option value=" 投手 "> 投手 </option>
                             <option value=" 捕手 "> 捕手 </option>
@@ -76,7 +71,8 @@
                             <option value=" 遊撃手 "> 遊撃手 </option>
                             <option value=" 外野手 "> 外野手 </option>
                         </select>
-                        <span th:if="${#fields.hasErrors('mainPosition')}" th:errors="*{mainPosition}" class="help-block">error!</span>
+                        <span th:if="${#fields.hasErrors('mainPosition')}" th:errors="*{mainPosition}"
+                              class="help-block"> error! </span>
                     </div>
                 </div>
                 <div class="form-group" th:classappend="${#fields.hasErrors('subPosition')}? 'has-error has-feedback'">
@@ -100,16 +96,17 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <input type="submit" class="btn btn-default" name="goToTopFromEdit" value=" 戻る "/>
-                        <input type="hidden" name="playerId" th:value="${param.playerId[0]}"/>
-                        <input type="submit" class="btn btn-primary" value=" 更新 "/>
+                        <input type="submit" class="btn btn-default" name="goToTopFromCreate" value=" 戻る "/>
+                        <input type="submit" class="btn btn-primary" value=" 作成 "/>
                     </div>
                 </div>
             </fieldset>
         </form>
+        <hr/>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
+<script src="https://ajax.googleapis.con/ajax/libs/jquery/1.11.1/jquery.min.js"
+        th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<script src="http://maxcdn.bootstrap.com/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
 </body>
 </html>

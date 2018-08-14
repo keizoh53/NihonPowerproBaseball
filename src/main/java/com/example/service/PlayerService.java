@@ -15,7 +15,7 @@ public class PlayerService {
     PlayerRepository playerRepository;
 
     public List<Player> findAll() {
-        return playerRepository.findAllOrderByName();
+        return playerRepository.findAllOrderByTeamAndUniformNumber();
     }
 
     public Player findOne(Integer playerId) {
